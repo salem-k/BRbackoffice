@@ -1,0 +1,56 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Event</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ entity.label }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+                <th>Textcolor</th>
+                <td>{{ entity.textcolor }}</td>
+            </tr>
+            <tr>
+                <th>Bgcolor</th>
+                <td>{{ entity.bgcolor }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ entity.image }}</td>
+            </tr>
+            <tr>
+                <th>Sound</th>
+                <td>{{ entity.sound }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{ entity.time }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('event') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('event_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

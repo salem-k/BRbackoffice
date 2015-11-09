@@ -1,0 +1,53 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Event list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Text</th>
+                <th>Textcolor</th>
+                <th>Bgcolor</th>
+                <th>Image</th>
+                <th>Sound</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('event_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.label }}</td>
+                <td>{{ entity.text }}</td>
+                <td>{{ entity.textcolor }}</td>
+                <td>{{ entity.bgcolor }}</td>
+                <td>{{ entity.image }}</td>
+                <td>{{ entity.sound }}</td>
+                <td>{{ entity.time }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('event_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('event_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('event_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

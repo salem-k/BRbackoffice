@@ -1,0 +1,69 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+
+
+
+<div class="well">
+  <h3>Evennement encours :</h3><br />
+
+</div>
+
+<div class="well">
+  <h3>Evenement manuel :</h3>
+  {{ form( eventForm, { 'style': 'inline' } ) }}
+  <nav>
+  <ul class="pager">
+    <li class="next">
+    <a href="javascript:void(0)" id="{{ path('event_execute') }}" class="executeOperation" >lancer l'evenement >></a>
+    </li>
+  </ul>
+</nav>
+
+
+
+</div>
+
+<div class="btn-group-vertical" role="group" aria-label="...">
+  <button type="button" class="btn btn-warning" style="text-align: left;">Bouton “Go” : Ecran Jaune</button>
+  <button type="button" class="btn btn-success" style="text-align: left;">Bouton “Go” : Ecran Vert</button>
+  <button type="button" class="btn btn-danger" style="text-align: left;">Bouton “Go” : Ecran Rouge</button>
+  <button type="button" class="btn label-default" style="text-align: left;">Bouton “Go” : Ecran Noir avec écrit en blanc “Batelier Records”.</button>
+  <button type="button" class="btn label-default" style="text-align: left;">Bouton “Go” : Bouton “Go” : Ecran blanc avec le logo de Batelier Records</button>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{dump(entities)}}
+{% for temp in entities %}
+<tr>
+  <td>{{temp.name}}</td>
+  <td>{{temp.description}}</td>
+  <td><button type="submit" class="btn btn-default" style="float:right;">Lancer cette sequence</button></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="2">
+    <table class="table table-hover">
+        {% for temp1 in temp.events %}
+        <tr>
+          <td>{{temp1.label}}</td>
+          <td>{{temp1.text}}</td>
+          <td>{{temp1.textcolor}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+  </td>
+</tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock %}
