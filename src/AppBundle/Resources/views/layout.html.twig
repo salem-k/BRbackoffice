@@ -15,11 +15,13 @@
 <body>
 
   {% block body %}
-    {% endblock %}
-
+  {% endblock %}
     <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
     <script src="{{ asset('js/jquery.js') }}"></script>
     <!-- Include all JavaScripts, compiled by Assetic -->
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    {% block javascripts %}
+
+{% endblock %}
 </body>
 </html>

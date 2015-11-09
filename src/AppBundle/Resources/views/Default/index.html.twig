@@ -1,4 +1,48 @@
+
 {% extends 'AppBundle::layout.html.twig' %}
+{% block javascripts %}
+
+<script type="text/javascript">
+  function executeEvent (){
+    var label = $("#appbundle_event_label").val();
+    var text = $("#appbundle_event_text").val();
+    var textcolor = $("#appbundle_event_textcolor").val();
+    var bgcolor = $("#appbundle_event_bgcolor").val();
+    var image = $("#appbundle_event_image").val();
+    var sound = $("#appbundle_event_sound").val();
+    var time = $("#appbundle_event_time").val();
+    execute( label, text, textcolor, bgcolor, image, sound , time);
+  }
+  function execute( label, text, textcolor, bgcolor, image, sound , time){
+    $.ajax({
+      method: "POST",
+      url: "{{ path('event_execute') }}",
+      data: { label: label, text: text, textcolor: textcolor, bgcolor: bgcolor, image: image, sound: sound , time : time },
+    }).success(function(data,status,header){
+      if ("ok" == data){
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").alert('close');
+          });
+      }else{
+        $("#alert-danger").fadeTo(2000, 500).slideUp(500, function(){
+            $("#alert-danger").alert('close');
+          });
+      }
+
+    }).error(function(error,jqx,header){
+        console.log(error);
+    });
+  }
+//--------  alert  --------
+$(document).ready (function(){
+    $("#success-alert").hide();
+    $("#alert-danger").hide();
+
+ });
+
+</script>
+{% endblock %}
+
 
 {% block body %}
 
@@ -25,11 +69,11 @@
 </div>
 
 <div class="btn-group-vertical" role="group" aria-label="...">
-  <button type="button" class="btn btn-warning" style="text-align: left;">Bouton “Go” : Ecran Jaune</button>
-  <button type="button" class="btn btn-success" style="text-align: left;">Bouton “Go” : Ecran Vert</button>
-  <button type="button" class="btn btn-danger" style="text-align: left;">Bouton “Go” : Ecran Rouge</button>
-  <button type="button" class="btn label-default" style="text-align: left;">Bouton “Go” : Ecran Noir avec écrit en blanc “Batelier Records”.</button>
-  <button type="button" class="btn label-default" style="text-align: left;">Bouton “Go” : Bouton “Go” : Ecran blanc avec le logo de Batelier Records</button>
+  <button type="button" class="btn btn-warning" style="text-align: left;" onclick="execute( 'Ecran Jaune', '', '', '#D2D490', '', '' , '10000');">Bouton “Go” : Ecran Jaune</button>
+  <button type="button" class="btn btn-success" style="text-align: left;" onclick="execute( 'Ecran Vert', '', '', '#287820', '', '' , '10000');">Bouton “Go” : Ecran Vert</button>
+  <button type="button" class="btn btn-danger" style="text-align: left;" onclick="execute( 'Ecran Rouge', '', '', '#B52410', '', '' , '10000');">Bouton “Go” : Ecran Rouge</button>
+  <button type="button" class="btn label-default" style="text-align: left;" onclick="execute( 'Ecran Noir', '', '', '#000000', '', '' , '10000');">Bouton “Go” : Ecran Noir avec écrit en blanc “Batelier Records”.</button>
+  <button type="button" class="btn label-default" style="text-align: left;" onclick="execute( 'Ecran Blanc', '', '', '#ffffff', '', '' , '10000');">Bouton “Go” : Bouton “Go” : Ecran blanc avec le logo de Batelier Records</button>
 </div>
 
 

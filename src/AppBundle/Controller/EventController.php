@@ -3,12 +3,16 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Event;
 use AppBundle\Form\EventType;
+
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * Event controller.
@@ -246,24 +250,30 @@ class EventController extends Controller
     }
 
     /**
-     * save date in operation.txt + stopper la séquences encours
-     *
-     * @Route("/executeevent", name="event_execute")
-     * @Method("POST")
-     * @Template()
-     */
-    public function executeeventAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
+      * save date in operation.txt + stopper la séquences encours
+      *
+      * @Route("/executeEvent", name="event_execute")
+      * @Method("POST")
+      */
+     public function executeEventAction(Request $request)
+     {
 
-        $entity = $em->getRepository('AppBundle:Operation')->find($id);
+         $event = $request->request->get('label').";".$request->request->get('text').";".$request->request->get('textcolor').";"
+                           .$request->request->get('bgcolor').";".$request->request->get('image').";".$request->request->get('sound').";"
+                           .$request->request->get('time');
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Operation entity.');
-        }
-        //ecrire l evenement encours
-        return array(
-            'entity'      => $entity
-        );
-    }
-}
+         $fs = new Filesystem();
+         $directory = __DIR__ . "/../../../web/operation/";
+
+         try {
+           $fs->mkdir($directory, 0700);
+           $fs->touch($directory."/".'operation.txt');
+
+           $fs->dumpFile($directory."/".'operation.txt', $event);
+         } catch (Exception $e) {
+           return new Response('nok',  200, array());
+         }
+
+         return new Response('ok',  200, array());
+     }
+ }
