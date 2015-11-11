@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/spectrum.css') }}" rel="stylesheet" media="screen">
 
     <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
@@ -20,8 +21,19 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <!-- Include all JavaScripts, compiled by Assetic -->
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/spectrum.js') }}"></script>
     {% block javascripts %}
 
 {% endblock %}
+<script>
+$("#appbundle_event_textcolor").spectrum({
+    color: "#f00",
+    preferredFormat : "hex"
+});
+$("#appbundle_event_bgcolor").spectrum({
+    color: "#f00",
+    preferredFormat : "hex"
+});
+</script>
 </body>
 </html>
