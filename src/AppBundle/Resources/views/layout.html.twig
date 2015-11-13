@@ -1,39 +1,239 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-    <title>Batelier-Records ConcertManager BackOffice</title>
+<!DOCTYPE html><!--[if lt IE 7]>
+  <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
+  <![endif]--><!--[if IE 7]>
+  <html class="lt-ie9 lt-ie8" lang="en">
+  <![endif]--><!--[if IE 8]>
+  <html class="lt-ie9" lang="en">
+  <![endif]--><!--[if gt IE 8]>
+    <!-->
+    <html lang="en">
+    <!--
+  <![endif]-->
+    <title>LOCAL ::: Batelier-Records ConcertManager BackOffice :::</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ asset('css/spectrum.css') }}" rel="stylesheet" media="screen">
 
-    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+    <!-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">-->
+    <link href="{{ asset('css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" media="screen">
+
+
+    <link href="{{ asset('icomoon/style.css') }}" rel="stylesheet" media="screen">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js"></script>
+    <![endif]-->
+
+
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/fullcalendar.css') }}" rel="stylesheet" media="screen">
+
+    <link href="{{ asset('css/bootstrap-editable.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet" media="screen">
+
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 
 </head>
-
 <body>
+  <header>
+    <a href="index.html" class="logo">Battelier Records</a>
+    <!--
+    <div id="mini-nav">
+      <ul class="hidden-phone">
+        <li><a href="timeline.html" >Tasks</a></li>
+        <li><a href="#">Signup's <span id="newSignup">06</span></a></li>
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            Messages <span id="messagesCountDown">21</span>
+            <b class="caret icon-white"></b>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li class="quick-messages">
+              <img src="img/avatar-1.png" class="avatar" alt="Avatar">
+              <div class="message-date text-info">
+                <i>02 <span class="month">mins</span></i>
+              </div>
+              <div class="message-wrapper">
+                <h4 class="message-heading">Ubiquitous customized</h4>
+                <p class="message">
+                  Enable impactful niches engage impactful
+                </p>
+              </div>
+            </li>
+            <li class="quick-messages">
+              <img src="img/avatar-2.png" class="avatar" alt="Avatar">
+              <div class="message-date text-info">
+                <i>02 <span class="month">mins</span></i>
+              </div>
+              <div class="message-wrapper">
+                <h4 class="message-heading">Ubiquitous customized</h4>
+                <p class="message">
+                  Enable impactful niches engage impactful
+                </p>
+              </div>
+            </li>
+            <li class="quick-messages">
+              <img src="img/avatar-5.png" class="avatar" alt="Avatar">
+              <div class="message-date text-info">
+                <i>38 <span class="month">mins</span></i>
+              </div>
+              <div class="message-wrapper">
+                <h4 class="message-heading">Ubiquitous customized</h4>
+                <p class="message">
+                  Enable impactful niches engage impactful
+                </p>
+              </div>
+            </li>
+            <li class="quick-messages">
+              <img src="img/avatar-4.png" class="avatar" alt="Avatar">
+              <div class="message-date text-info">
+                <i>27 <span class="month">Apr</span></i>
+              </div>
+              <div class="message-wrapper">
+                <h4 class="message-heading">Ubiquitous customized</h4>
+                <p class="message">
+                  Enable impactful niches engage impactful
+                </p>
+              </div>
+            </li>
+            <li class="quick-messages">
+              <img src="img/avatar-6.png" class="avatar" alt="Avatar">
+              <div class="message-date text-info">
+                <i>18 <span class="month">Apr</span></i>
+              </div>
+              <div class="message-wrapper">
+                <h4 class="message-heading">Ubiquitous customized</h4>
+                <p class="message">
+                  Enable impactful niches engage impactful
+                </p>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </div>
+  -->
+  </header>
 
-  {% block body %}
-  {% endblock %}
+  <div class="container-fluid">
+    <div id="mainnav" class="hidden-phone hidden-tablet">
+      <ul>
+        <li class="active">
+          <span class="current-arrow"></span>
+          <a href="index.html">
+            <div class="icon">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe0a1;"></span>
+            </div>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="/sequence">
+            <div class="icon">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe047;"></span>
+            </div>
+            Sequences
+          </a>
+        </li>
+        <li>
+          <a href="/event">
+            <div class="icon">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe097;"></span>
+            </div>
+            Events
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dashboard-wrapper">
+      <div class="main-container">
+        <div class="navbar hidden-desktop">
+          <div class="navbar-inner">
+            <div class="container">
+              <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+              </a>
+              <div class="nav-collapse collapse navbar-responsive-collapse">
+                <ul class="nav">
+                  <li>
+                    <a href="index.html">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="graphs.html">Charts</a>
+                  </li>
+                  <li>
+                    <a href="timeline.html">Timeline</a>
+                  </li>
+                  <li>
+                    <a href="tables.html">Tables</a>
+                  </li>
+                  <li>
+                    <a href="forms.html">Forms</a>
+                  </li>
+                  <li>
+                    <a href="ui-elements.html">UI Elements</a>
+                  </li>
+                  <li>
+                    <a href="grid.html">Grid</a>
+                  </li>
+                  <li>
+                    <a href="gallery.html">Gallery</a>
+                  </li>
+                  <li>
+                    <a href="typography.html">Typography</a>
+                  </li>
+                  <li>
+                    <a href="icons.html">Icons</a>
+                  </li>
+                  <li>
+                    <a href="login.html">Login</a>
+                  </li>
+                  <li>
+                    <a href="error.html">404</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    {% block body %}
+    {% endblock %}
+
+
+    </div>
+  </div>
+  <footer>
+    <p class="copyright">&copy; Tunisian IT</p>
+  </footer>
+
     <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
     <script src="{{ asset('js/jquery.js') }}"></script>
     <!-- Include all JavaScripts, compiled by Assetic -->
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/spectrum.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui-1.8.23.custom.min.js') }}"></script>
+    <script src="{{ asset('js/morris/morris.js') }}"></script>
+    <script src="{{ asset('js/morris/raphael-min.js') }}"></script>
+    <script src="{{ asset('js/fullcalendar.js') }}"></script>
+    <script src="{{ asset('js/tiny-scrollbar.js') }}"></script>
+    <script src="{{ asset('js/custom-index.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     {% block javascripts %}
 
-{% endblock %}
-<script>
-$("#appbundle_event_textcolor").spectrum({
-    color: "#f00",
-    preferredFormat : "hex"
-});
-$("#appbundle_event_bgcolor").spectrum({
-    color: "#f00",
-    preferredFormat : "hex"
-});
-</script>
+    {% endblock %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#appbundle_event_textcolor").colorpicker();
+      $("#appbundle_event_bgcolor").colorpicker();
+    });
+    </script>
+
+
 </body>
 </html>

@@ -1,1 +1,1 @@
-qsd;Music;#ff9000;#000000;logo1.png;Tone.mp3;10000
+screen3;3;#FFFFFF;#000000;;;3000

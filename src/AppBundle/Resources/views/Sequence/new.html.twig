@@ -1,10 +1,26 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body -%}
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="widget no-margin">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Sequences
+        </div>
+      </div>
+      <div class="widget-body">
+
     <h1>Sequence creation</h1>
 
     {{ form(form) }}
 
+
+  </div>
+</div>
+</div>
+</div>
         <ul class="record_actions">
     <li>
         <a href="{{ path('sequence') }}">
