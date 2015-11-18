@@ -197,8 +197,8 @@ class SequenceController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('sequence_edit', array('id' => $id)));
+            return $this->redirect( $this->generateUrl('sequence') );
+            //return $this->redirect($this->generateUrl('sequence_edit', array('id' => $id)));
         }
 
         return array(

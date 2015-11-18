@@ -1,0 +1,7 @@
+{% extends 'BraincraftedBootstrapBundle:Form:form_div_layout.html.twig' %}
+{% block url_widget %}
+{% spaceless %}
+    {% set type = type|default('url') %}
+    {{ block('form_widget_simple') }}
+{% endspaceless %}
+{% endblock url_widget %}

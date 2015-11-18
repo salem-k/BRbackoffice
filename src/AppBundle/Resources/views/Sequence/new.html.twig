@@ -1,31 +1,35 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% block javascripts %}
+$(document).ready(function(){
+  $('select[name$="[sequence]"]').css('display','none');
+});
+{% endblock %}
+
+
 {% block body -%}
 
-<div class="row-fluid">
-  <div class="span12">
-    <div class="widget no-margin">
-      <div class="widget-header">
-        <div class="title">
-          <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Sequences
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget no-margin">
+          <div class="widget-header">
+            <div class="title">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Sequence creation
+            </div>
+          </div>
+          <div class="widget-body">
+            {{ form(form,{ 'style': 'horizontal'}) }}
+          </div>
         </div>
       </div>
-      <div class="widget-body">
+    </div>
 
-    <h1>Sequence creation</h1>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('sequence') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
 
-    {{ form(form) }}
-
-
-  </div>
-</div>
-</div>
-</div>
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('sequence') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

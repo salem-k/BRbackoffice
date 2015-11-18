@@ -16,31 +16,25 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label','text',array(
-              'label'             => 'Label',
-              'attr'     => array(
-                  'class'       => 'input-sm',
-                  'width'=>'150px',
-              ),
-            ))
+            ->add('label','text')
             ->add('text','text',array(
               'label'             => 'Text',
               'attr'     => array(
-                  'class'       => 'input-sm',
+                  'class'       => 'input-xlarge',
                   'width'=>'150px',
               ),
             ))
             ->add('textcolor','text',array(
               'label'             => 'Text Color',
               'attr'     => array(
-                  'class'       => 'input-sm',
+                  'class'       => 'input-xlarge',
                   'width'=>'150px',
               ),
             ))
             ->add('bgcolor','text',array(
               'label'             => 'Background Color',
               'attr'     => array(
-                  'class'       => 'input-sm',
+                  'class'       => 'input-xlarge',
                   'width'=>'150px',
               ),
             ))
@@ -57,11 +51,11 @@ class EventType extends AbstractType
             ->add('time','text',array(
               'label'             => 'Durée exécution',
               'attr'     => array(
-                  'class'       => 'input-sm',
+                  'class'       => 'input-xlarge',
                   'width'=>'150px',
               ),
             ))
-            ->add('sequence')
+            //->add('sequence')
         ;
     }
 

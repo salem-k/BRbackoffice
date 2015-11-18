@@ -33,7 +33,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Event')->findAll();
+        $entities = $em->getRepository('AppBundle:Event')->findBySequence(null);
 
         return array(
             'entities' => $entities,

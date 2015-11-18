@@ -12,25 +12,25 @@
     var time = $("#appbundle_event_time").val();
     execute( label, text, textcolor, bgcolor, image, sound , time,0);
   }
-  function execute( label, text, textcolor, bgcolor, image, sound , time,continueSequence){
-    if( continueSequence == 0 )
-      Sequence = 0;
+  function execute( data_label, data_text, data_textcolor, data_bgcolor, data_image, data_sound , data_time, data_continueSequence){
+    if( data_continueSequence == 0 )
+      sequenceId = 0;
     $.ajax({
       method: "POST",
       url: "{{ path('event_execute') }}",
-      data: { label: label, text: text, textcolor: textcolor, bgcolor: bgcolor, image: image, sound: sound , time : time },
+      data: { label: data_label, text: data_text, textcolor: data_textcolor, bgcolor: data_bgcolor, image: data_image, sound: data_sound , time : data_time },
     }).success(function(data,status,header){
       console.log( data );
       if ("ok" == data){
 
         if(
-          label == $('.eventEncoursLabel').html() &&
-          text == $('.eventEncoursText').html() &&
-          textcolor == $('.eventEncoursTextcolor').html() &&
-          bgcolor == $('.eventEncoursBgcolor').html() &&
-          image == $('.eventEncoursImage').html() &&
-          sound == $('.eventEncoursSound').html() &&
-          time == $('.eventEncoursTime').html()
+          data_label == $('.eventEncoursLabel').html() &&
+          data_text == $('.eventEncoursText').html() &&
+          data_textcolor == $('.eventEncoursTextcolor').html() &&
+          data_bgcolor == $('.eventEncoursBgcolor').html() &&
+          data_image == $('.eventEncoursImage').html() &&
+          data_sound == $('.eventEncoursSound').html() &&
+          data_time == $('.eventEncoursTime').html()
         ){
           //nothing
         }else{
@@ -46,16 +46,15 @@
 
           newEventEncours.addClass('fullEventEncours');
 
-          $('.fullEventEncours .eventEncoursDiv').css('background',bgcolor);
-          $('.fullEventEncours .eventEncoursDiv').css('color',textcolor);
-
-          $('.fullEventEncours .eventEncoursLabel').html(label);
-          $('.fullEventEncours .eventEncoursText').html(text);
-          $('.fullEventEncours .eventEncoursTextcolor').html(textcolor);
-          $('.fullEventEncours .eventEncoursBgcolor').html(bgcolor);
-          $('.fullEventEncours .eventEncoursImage').html(image);
-          $('.fullEventEncours .eventEncoursSound').html(sound);
-          $('.fullEventEncours .eventEncoursTime').html(time/1000);
+          $('.fullEventEncours .eventEncoursDiv').css('background',data_bgcolor);
+          $('.fullEventEncours .eventEncoursDiv').css('color',data_textcolor);
+          $('.fullEventEncours .eventEncoursLabel').html(data_label);
+          $('.fullEventEncours .eventEncoursText').html(data_text);
+          $('.fullEventEncours .eventEncoursTextcolor').html(data_textcolor);
+          $('.fullEventEncours .eventEncoursBgcolor').html(data_bgcolor);
+          $('.fullEventEncours .eventEncoursImage').html(data_image);
+          $('.fullEventEncours .eventEncoursSound').html(data_sound);
+          $('.fullEventEncours .eventEncoursTime').html(data_time/1000);
 
 
           $('#scrollbar-three').tinyscrollbar();
@@ -97,23 +96,25 @@
 
   var sequenceTimer = setInterval(function(){
 
+//      console.log( "sequenceId" + sequenceId );
 
+//      console.log( evtCounter + " == " + ( data[sequenceId].events.length-1 ) );
 
       if( sequenceId != 0 && evtCounter <= data[sequenceId].events.length-1 ){
           timeLastEvent = parseInt(data[sequenceId].events[evtCounter].time) ;
           timeNow = new Date().getTime();
 
-          //console.log( timeNow );
-          //console.log( timeStart+timeLastEvent );
+//          console.log( timeNow );
+//          console.log( timeStart+timeLastEvent );
 
 
 
           if( timeNow >= ( timeLastEvent+timeStart ) ){
             timeStart = new Date().getTime();
-            //console.log('#2');
+//            console.log('#2');
             eventEncours = data[sequenceId].events[evtCounter];
 
-            execute( eventEncours.label, eventEncours.text, eventEncours.textcolor, eventEncours.bgcolor, eventEncours.image, eventEncours.sound , eventEncours.time, 0);
+            execute( eventEncours.label, eventEncours.text, eventEncours.textcolor, eventEncours.bgcolor, eventEncours.image, eventEncours.sound , eventEncours.time, 1);
             evtCounter++;
 
           }
@@ -152,6 +153,110 @@ $(document).ready (function(){
 
 
           <div class="row-fluid">
+
+            <div class="span4">
+              <div class="widget">
+                <div class="widget-header">
+                  <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span> Evenement manuel
+                  </div>
+                </div>
+                <div class="widget-body">
+
+
+
+                    <button type="button" class="btn btn-warning" style="text-align: left;" onclick="execute( 'Ecran Jaune', '', '', '#FD9500', '', '' , '10000',0);">Bouton “Go” : Ecran Jaune</button>
+                    <br /><br />
+                    <button type="button" class="btn btn-success" style="text-align: left;" onclick="execute( 'Ecran Vert', '', '', '#006A32', '', '' , '10000',0);">Bouton “Go” : Ecran Vert</button>
+                    <br /><br />
+                    <button type="button" class="btn btn-danger" style="text-align: left;" onclick="execute( 'Ecran Rouge', '', '', '#C10100', '', '' , '10000',0);">Bouton “Go” : Ecran Rouge</button>
+                    <br /><br />
+                    <button type="button" class="btn label-default" style="text-align: left;" onclick="execute( 'Ecran Noir', 'Battelier Records', '#ffffff', '#000000', '', '' , '10000',0);">Bouton “Go” : Ecran Noir avec écrit en blanc “Batelier Records”.</button>
+                    <br /><br />
+                    <button type="button" class="btn btn-default" style="text-align: left;" onclick="execute( 'Ecran Blanc', '', '', '#ffffff', 'icon.jpg', '' , '10000',0);">Bouton “Go” : Ecran blanc avec le logo de Batelier Records</button>
+
+                    <h6>Events depuis la base de donnée</h6>
+                    {% for temp in events %}
+                      <button type="button" class="btn label-default" style="text-align: left;" onclick="execute( '{{temp.label}}', '{{temp.text}}', '{{temp.textcolor}}', '{{temp.bgcolor}}', '{{temp.image}}', '{{temp.sound}}' , '{{temp.time}}');">{{temp.label}}</button>
+                    {% endfor %}
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="span4">
+              <div class="widget">
+                <div class="widget-header">
+                  <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span> Evenement manuel
+                  </div>
+                </div>
+                <div class="widget-body">
+                  <form name="appbundle_event" method="post" action="/event/" class="form-inline" role="form">
+                     {{ bootstrap_set_style('inline') }}
+                      <div class="control-group">
+                        {{ form_label(eventForm.label) }}
+                        <div class="controls">
+                          <input placeholder="Label" type="text" id="appbundle_event_label" name="appbundle_event[label]" required="required" class="input-block-level form-control">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label(eventForm.text) }}
+                        <div class="controls">
+                          <input placeholder="Text" type="text" id="appbundle_event_text" name="appbundle_event[text]" required="required" class="input-block-level form-control">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label(eventForm.textcolor) }}
+                        <div class="controls">
+                          <input placeholder="Text Color" type="text" id="appbundle_event_textcolor" name="appbundle_event[textcolor]" required="required" class="input-block-level form-control">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label(eventForm.bgcolor) }}
+                        <div class="controls">
+                          <input placeholder="Background color" type="text" id="appbundle_event_bgcolor" name="appbundle_event[bgcolor]" required="required" class="input-block-level form-control">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label(eventForm.image) }}
+                        <div class="controls">
+                          {{ form_widget(eventForm.image, {'attr': {'class': 'input-block-level'}} ) }}
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label(eventForm.sound) }}
+                        <div class="controls">
+                          {{ form_widget( eventForm.sound, {'attr': {'class': 'input-block-level'}} ) }}
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        {{ form_label( eventForm.time ) }}
+                        <div class="controls">
+                          <input placeholder="Temps" type="text" id="appbundle_event_time" name="appbundle_event[time]" required="required" class="input-block-level form-control">
+                        </div>
+                      </div>
+            <hr>
+                  <div class="control-group info no-margin">
+                    <div class="controls">
+                      <a href="javascript:void(0)" onclick="executeEvent()" type="submit" class="btn btn-info pull-right">lancer l'evenement ></a>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+
+                  {{ bootstrap_set_style('') }}
+                </form>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
             <div class="span4">
               <div class="widget">
                 <div class="widget-header">
@@ -202,111 +307,12 @@ $(document).ready (function(){
               </div>
             </div>
 
-            <div class="span4">
-              <div class="widget">
-                <div class="widget-header">
-                  <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span> Evenement manuel
-                  </div>
-                </div>
-                <div class="widget-body">
-                  <form name="appbundle_event" method="post" action="/event/" class="form-horizontal" role="form">
-                     {{ bootstrap_set_style('horizontal') }}
-                      <div class="control-group">
-                        {{ form_label(eventForm.label) }}
-                        <div class="controls">
-                          <input type="text" id="appbundle_event_label" name="appbundle_event[label]" required="required" class="input-medium form-control" width="150px">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.text) }}
-                        <div class="controls">
-                          <input type="text" id="appbundle_event_text" name="appbundle_event[text]" required="required" class="input-medium form-control" width="150px">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.textcolor) }}
-                        <div class="controls">
-                          <input type="text" id="appbundle_event_textcolor" name="appbundle_event[textcolor]" required="required" class="input-medium form-control" width="150px">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.bgcolor) }}
-                        <div class="controls">
-                          <input type="text" id="appbundle_event_bgcolor" name="appbundle_event[bgcolor]" required="required" class="input-medium form-control" width="150px">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.image) }}
-                        <div class="controls">
-                          {{ form_widget(eventForm.image) }}
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.sound) }}
-                        <div class="controls">
-                          {{ form_widget(eventForm.sound) }}
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        {{ form_label(eventForm.time) }}
-                        <div class="controls">
-                          <input type="text" id="appbundle_event_time" name="appbundle_event[time]" required="required" class="input-medium form-control" width="150px">
-                        </div>
-                      </div>
-<hr>
-                  <div class="control-group info no-margin">
-                    <div class="controls">
-                      <a href="javascript:void(0)" onclick="executeEvent()" type="submit" class="btn btn-info pull-right">lancer l'evenement ></a>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-
-                  {{ bootstrap_set_style('') }}
-                </form>
 
 
-                </div>
-              </div>
-            </div>
-
-
-
-            <div class="span4">
-              <div class="widget">
-                <div class="widget-header">
-                  <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span> Evenement manuel
-                  </div>
-                </div>
-                <div class="widget-body">
-
-
-
-                    <button type="button" class="btn btn-warning" style="text-align: left;" onclick="execute( 'Ecran Jaune', '', '', '#D2D490', '', '' , '10000');">Bouton “Go” : Ecran Jaune</button>
-                    <br /><br />
-                    <button type="button" class="btn btn-success" style="text-align: left;" onclick="execute( 'Ecran Vert', '', '', '#287820', '', '' , '10000');">Bouton “Go” : Ecran Vert</button>
-                    <br /><br />
-                    <button type="button" class="btn btn-danger" style="text-align: left;" onclick="execute( 'Ecran Rouge', '', '', '#B52410', '', '' , '10000');">Bouton “Go” : Ecran Rouge</button>
-                    <br /><br />
-                    <button type="button" class="btn label-default" style="text-align: left;" onclick="execute( 'Ecran Noir', 'Battelier Records', '#ffffff', '#000000', '', '' , '10000');">Bouton “Go” : Ecran Noir avec écrit en blanc “Batelier Records”.</button>
-                    <br /><br />
-                    <button type="button" class="btn btn-default" style="text-align: left;" onclick="execute( 'Ecran Blanc', '', '', '#ffffff', 'icon.jpg', '' , '10000');">Bouton “Go” : Ecran blanc avec le logo de Batelier Records</button>
-
-
-                </div>
-              </div>
-            </div>
 
 
 
           </div>
-
-
-
-
-
-
 
 
       <div class="row-fluid">

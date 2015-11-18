@@ -12,28 +12,35 @@
     <title>LOCAL ::: Batelier-Records ConcertManager BackOffice :::</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">-->
+
+
     <link href="{{ asset('css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" media="screen">
 
 
     <link href="{{ asset('icomoon/style.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+<link href="{{ asset('css/main.css') }}" rel="stylesheet" media="screen">
     <!--[if lte IE 7]>
     <script src="css/icomoon-font/lte-ie7.js"></script>
     <![endif]-->
 
 
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ asset('css/fullcalendar.css') }}" rel="stylesheet" media="screen">
 
-    <link href="{{ asset('css/bootstrap-editable.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/fullcalendar.css') }}" rel="stylesheet" media="screen">
+<!--
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/bootstrap_form_2.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/bootstrap_form_4.css') }}" rel="stylesheet" media="screen">
+-->
+
+
 
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 
 </head>
 <body>
   <header>
-    <a href="index.html" class="logo">Battelier Records</a>
+    <a href="{{ path('homepage') }}" class="logo">Battelier Records</a>
     <!--
     <div id="mini-nav">
       <ul class="hidden-phone">
@@ -116,29 +123,37 @@
   <div class="container-fluid">
     <div id="mainnav" class="hidden-phone hidden-tablet">
       <ul>
-        <li class="active">
+        <li{% if app.request.get('_route') == 'homepage' %} class="active"{% endif %}>
           <span class="current-arrow"></span>
-          <a href="index.html">
+          <a href="{{ path('homepage') }}">
             <div class="icon">
               <span class="fs1" aria-hidden="true" data-icon="&#xe0a1;"></span>
             </div>
             Dashboard
           </a>
         </li>
-        <li>
-          <a href="/sequence">
+        <li{% if app.request.get('_route') == 'sequence' %} class="active"{% endif %}>
+          <a href="{{ path('sequence') }}">
             <div class="icon">
               <span class="fs1" aria-hidden="true" data-icon="&#xe047;"></span>
             </div>
             Sequences
           </a>
         </li>
-        <li>
-          <a href="/event">
+        <li{% if app.request.get('_route') == 'event' %} class="active"{% endif %}>
+          <a href="{{ path('event') }}">
             <div class="icon">
               <span class="fs1" aria-hidden="true" data-icon="&#xe097;"></span>
             </div>
             Events
+          </a>
+        </li>
+        <li{% if app.request.get('_route') == 'send' %} class="active"{% endif %}>
+          <a href="{{ path('send') }}">
+            <div class="icon">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe100;"></span>
+            </div>
+            Notifications
           </a>
         </li>
       </ul>
@@ -159,41 +174,18 @@
               </a>
               <div class="nav-collapse collapse navbar-responsive-collapse">
                 <ul class="nav">
-                  <li>
-                    <a href="index.html">Dashboard</a>
+                  <li{% if app.request.get('_route') == 'homepage' %} class="active"{% endif %}>
+                    <span class="current-arrow"></span>
+                    <a href="{{ path('homepage') }}">Dashboard</a>
                   </li>
-                  <li>
-                    <a href="graphs.html">Charts</a>
+                  <li{% if app.request.get('_route') == 'sequence' %} class="active"{% endif %}>
+                    <a href="{{ path('sequence') }}">Sequences</a>
                   </li>
-                  <li>
-                    <a href="timeline.html">Timeline</a>
+                  <li{% if app.request.get('_route') == 'event' %} class="active"{% endif %}>
+                    <a href="{{ path('event') }}">Events</a>
                   </li>
-                  <li>
-                    <a href="tables.html">Tables</a>
-                  </li>
-                  <li>
-                    <a href="forms.html">Forms</a>
-                  </li>
-                  <li>
-                    <a href="ui-elements.html">UI Elements</a>
-                  </li>
-                  <li>
-                    <a href="grid.html">Grid</a>
-                  </li>
-                  <li>
-                    <a href="gallery.html">Gallery</a>
-                  </li>
-                  <li>
-                    <a href="typography.html">Typography</a>
-                  </li>
-                  <li>
-                    <a href="icons.html">Icons</a>
-                  </li>
-                  <li>
-                    <a href="login.html">Login</a>
-                  </li>
-                  <li>
-                    <a href="error.html">404</a>
+                  <li{% if app.request.get('_route') == 'send' %} class="active"{% endif %}>
+                    <a href="{{ path('send') }}">Notifications</a>
                   </li>
                 </ul>
               </div>
@@ -208,6 +200,7 @@
 
     </div>
   </div>
+
   <footer>
     <p class="copyright">&copy; Tunisian IT</p>
   </footer>
@@ -217,13 +210,10 @@
     <!-- Include all JavaScripts, compiled by Assetic -->
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui-1.8.23.custom.min.js') }}"></script>
-    <script src="{{ asset('js/morris/morris.js') }}"></script>
-    <script src="{{ asset('js/morris/raphael-min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>
     <script src="{{ asset('js/tiny-scrollbar.js') }}"></script>
-    <script src="{{ asset('js/custom-index.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+
+
     {% block javascripts %}
 
     {% endblock %}

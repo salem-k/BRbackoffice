@@ -68,8 +68,8 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-              </table>
-
+              </table><br />
+              <a href="{{ path('sequence_new') }}" class="btn btn-info pull-right">Ajouter nouvelle séquence</a>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -79,12 +79,4 @@
 
 
 
-
-        <ul>
-        <li>
-            <a href="{{ path('sequence_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

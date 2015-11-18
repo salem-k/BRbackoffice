@@ -1,9 +1,17 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>Event list</h1>
-
-    <table class="records_list">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget no-margin">
+          <div class="widget-header">
+            <div class="title">
+              <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Events
+            </div>
+          </div>
+          <div class="widget-body">
+            <div id="dt_example" class="example_alt_pagination">
+              <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,25 +37,17 @@
                 <td>{{ entity.sound }}</td>
                 <td>{{ entity.time }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('event_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('event_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <a href="{{ path('event_edit', { 'id': entity.id }) }}" class="btn btn-info btn-small">Edit</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
-    </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('event_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+    </table><br >
+<a href="{{ path('event_new') }}" class="btn btn-info pull-right">Ajouter nouveau évenement</a>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

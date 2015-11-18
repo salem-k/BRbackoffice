@@ -24,9 +24,11 @@ class SequenceType extends AbstractType
                             'allow_delete'       => true,
                             'add_button_text'    => 'Add',
                             'delete_button_text' => 'X',
+                            'sub_widget_col'     => 11,
+                            'button_col'         => 1,
                             'prototype_name'     => 'inlinep',
                             'options'            => array(
-                                'attr' => array('style' => 'inline')
+                              'attr' => array('style' => 'inline')
                             )
                         ))
         ;
